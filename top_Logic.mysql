@@ -1,0 +1,60 @@
+--create Table 
+
+CREATE TABLE employees (
+    employee_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    first_name VARCHAR(50),
+    salary INT,
+    department_id INT,
+    manager_id INT,
+    join_date DATE,
+    birth_date DATE,
+    job_title VARCHAR(50),
+    email VARCHAR(100),
+    bonus INT
+);
+-- insert into Values
+
+INSERT INTO employees
+(employee_id, name, first_name, salary, department_id, manager_id, join_date, birth_date, job_title, email, bonus)
+VALUES
+(1, 'Arun', 'Arun', 60000, 101, NULL, '2018-01-10', '1990-05-12', 'Manager', 'arun@example.com', 5000),
+
+(2, 'Bala', 'Bala', 50000, 101, 1, '2019-03-15', '1992-08-20', 'Developer', 'bala@example.com', 3000),
+
+(3, 'Chandru', 'Chandru', 50000, 101, 1, '2020-06-20', '1991-04-10', 'Developer', 'chandru@example.com', 3000),
+
+(4, 'Divya', 'Divya', 45000, 102, 6, '2021-02-10', '1995-07-18', 'Tester', 'divya@example.com', NULL),
+
+(5, 'Ezhil', 'Ezhil', 40000, 102, 6, '2022-04-25', '1996-11-05', 'Tester', 'ezhil@example.com', 2000),
+
+(6, 'Fahad', 'Fahad', 55000, 102, NULL, '2017-09-12', '1988-03-22', 'Manager', 'fahad@example.com', 5000),
+
+(7, 'Gokul', 'Gokul', 35000, 103, 6, '2023-01-15', '1998-01-30', 'Developer', 'gokul@example.com', NULL),
+
+(8, 'Hari', 'Hari', 30000, 103, 6, '2023-05-10', '1999-06-14', 'Developer', 'hari@example.com', 1500),
+
+(9, 'Anu', 'Anu', 25000, 103, 6, '2024-02-20', '2000-09-25', 'Intern', 'anu@example.com', NULL),
+
+(10, 'Kiran', 'Kiran', 45000, 102, 6, '2020-08-18', '1994-02-15', 'Tester', 'kiran@example.com', 2000),
+
+(11, 'Aravind', 'Aravind', 50000, 101, 1, '2021-10-05', '1993-12-10', 'Developer', 'aravind@example.com', 3000),
+
+(12, 'Naveen', 'Naveen', 40000, 103, 6, '2022-11-15', '1997-03-08', 'Developer', 'naveen@example.com', NULL),
+
+(13, 'Meena', 'Meena', 35000, 101, 1, '2023-03-12', '1998-05-19', 'Developer', 'meena@example.com', 1000),
+
+(14, 'Ravi', 'Ravi', 30000, 102, 6, '2024-01-10', '1999-10-21', 'Tester', 'ravi@example.com', NULL),
+
+(15, 'Suresh', 'Suresh', 20000, 103, 6, '2024-06-15', '2001-02-11', 'Intern', 'suresh@example.com', NULL); 
+
+-- Retrive the Data from Table
+--select * from Employees;
+
+-- 1.How do Retrive Second Highest Salary of an employee?
+--select max(salary) as Second_Highest_Salary  from Employees where salary < (select max(salary) from Employees)
+
+--2.How do get the nth highest Salary in?
+--select * from Employees order by salary desc limit 1 offset 3
+
+-- How do you fetch the all employees whose salary is greater then 
