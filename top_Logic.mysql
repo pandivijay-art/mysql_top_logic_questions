@@ -1,6 +1,6 @@
 --create Table 
 
-CREATE TABLE employees (
+/*CREATE TABLE employees (
     employee_id INT PRIMARY KEY,
     name VARCHAR(50),
     first_name VARCHAR(50),
@@ -13,9 +13,8 @@ CREATE TABLE employees (
     email VARCHAR(100),
     bonus INT
 );
--- insert into Values
-
-INSERT INTO employees
+-- insert into Values*/
+/* INSERT INTO employees
 (employee_id, name, first_name, salary, department_id, manager_id, join_date, birth_date, job_title, email, bonus)
 VALUES
 (1, 'Arun', 'Arun', 60000, 101, NULL, '2018-01-10', '1990-05-12', 'Manager', 'arun@example.com', 5000),
@@ -57,4 +56,20 @@ VALUES
 --2.How do get the nth highest Salary in?
 --select * from Employees order by salary desc limit 1 offset 3
 
--- How do you fetch the all employees whose salary is greater then 
+--3. How do you fetch the all employees whose salary is greater then  averge salary
+
+*/
+
+
+--select * from Employees where salary >(select avg(salary) from Employees)
+
+-- 4.write a query to display the current date and time
+
+--select current_timestamp
+
+--5.how do find the duplicate recordes in the table
+
+--select department_id,count(*) from Employees group by department_id having count(*) > 1;
+
+--6.how can delete duplicate rows 
+
