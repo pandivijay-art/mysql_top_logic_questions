@@ -1,0 +1,79 @@
+-- create emp table
+create table emp(
+  employee_id INT64,
+  name STRING,
+  department_id INT64
+);
+
+--insert Values into emp table
+INSERT INTO emp (employee_id,name,department_id) 
+VALUES 
+(1,"Arun",10),
+(2,"Bala",20),
+(3,"kumar",30),
+(4,"Ravi",null),
+(5,"siva",10);
+
+
+-- retrive data from emp table
+select * from emp;
+
+ -- create departments Table
+ CREATE TABLE departments (
+    department_id INT PRIMARY KEY,
+    department_name VARCHAR(50)
+    );
+    */
+--insert values into departments
+INSERT INTO departments (department_id, department_name)
+VALUES
+(10, 'IT'),
+(20, 'HR'),
+(30, 'Finance'),
+(40, 'Marketing');
+
+-- retrive data from Departments Table
+select * from departments
+
+--1.display tha all emp name and department 
+select employee_id,name from emp a inner join departments b on a.department_id = b.department_id;
+
+--2.display only It department Name
+select emp.name,departments.department_name from emp inner join departments on emp.department_id = departments.department_id where department_name="IT"
+
+-- Left Join 
+
+--1.display the all employeees with department name 
+select * from emp a left join departments b on a.department_id = b.department_id;
+
+--2.display non department employees 
+select  from emp a left join departments b on a.department_id = b.department_id where b.department_name is null
+
+--3.display all employees and show whether they have a department or not .
+select a.name,b.department_name from emp a left join departments b on a.department_id = b.department_id
+
+--right Join 
+
+--1.display all departments along with the employees working in them.
+select * from departments a left join emp b on a.department_id = b.department_id
+
+--2.find the departments that do not have any employees.
+select a.department_name,b.name from departments a left join emp b  on a.department_id = b.department_id where b.department_id is null
+
+--3.find the department that have more than one employee
+select a.department_name,a.department_id ,count(employee_id) from departments a left join emp b on a.department_id = b.department_id group by   a.department_name,a.department_id having count(employee_id) >1;
+
+-- full outer join 
+
+-- 1.display all employees and all departments 
+
+select * from emp a left join departments b on a.department_id = b.department_id
+union select * from departments a  left join emp  b on a.department_id = b.department_id
+
+--2.Display the emp_id,emp_name,department_id,and department name for all recordes from both table including unmatched recordes.
+select a.employee_id,a.name,a.department_id,b.department_name from emp a left join departments b on a.department_id = b.department_id
+union 
+select b.employee_id,b.name,a.department_id,a.department_name from departments a  left join emp  b on a.department_id = b.department_id
+
+
+
