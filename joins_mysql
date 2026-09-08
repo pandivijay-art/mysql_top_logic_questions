@@ -23,7 +23,7 @@ select * from emp;
     department_id INT PRIMARY KEY,
     department_name VARCHAR(50)
     );
-    */
+    
 --insert values into departments
 INSERT INTO departments (department_id, department_name)
 VALUES
