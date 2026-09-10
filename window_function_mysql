@@ -1,0 +1,37 @@
+CREATE TABLE Employees (
+    emp_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    department VARCHAR(50),
+    salary INT,
+    age INT
+);INSERT INTO Employees (emp_id, name, department, salary, age)
+VALUES
+(1, 'Arun', 'IT', 60000, 25),
+(2, 'Bala', 'IT', 50000, 28),
+(3, 'Kumar', 'IT', 50000, 26),
+(4, 'Ravi', 'IT', 40000, 30),
+(5, 'Mani', 'HR', 70000, 32),
+(6, 'Siva', 'HR', 60000, 29),
+(7, 'Vijay', 'HR', 60000, 27),
+(8, 'Ajay', 'HR', 45000, 31);
+
+-- Retriving The data from Tables.
+select * from  Employees
+
+--1.Display the All employess with a row_number based on the Salary from highest to lowest
+select *,row_number() over(order by salary desc) as Row_numer from  Employees
+
+--2.Display the all employees with a Rank() Based on the Salary from Highest to Lowest.
+select *,rank() over(order by salary desc)from  Employees
+
+--3.display employee_name,department,salary, and Dense_rank separtly for each department .
+select name,department,salary, dense_rank() over(partition by department order by salary desc) as eash_department_highest from  Employees
+
+--4. Display the employee name, department, salary, and assign a ranking based on salary in descending order. If two employees have the same salary, they should receive the same rank, and the next rank should be skipped.
+select name,department,salary,rank() over(order by salary desc) as Rank_salary from Employees
+
+--5 Display the employee name, department, salary, and assign a ranking separately for each department. Employees with the same salary should receive the same rank, but there should be no gaps in the ranking
+select name,department,salary,dense_rank() over(partition by department order by salary) as dense_rank_salary from Employees 
+
+--6.Display the employee name, department, salary, and assign a unique sequential number to every employee based on salary from highest to lowest. Even employees with the same salary must receive different numbers.
+select name,department,salary,row_number() over(order by salary desc) as highest_salary from Employees 
