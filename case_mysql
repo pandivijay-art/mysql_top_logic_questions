@@ -1,0 +1,40 @@
+CREATE TABLE employees (
+    emp_id INT,
+    emp_name VARCHAR(50),
+    department VARCHAR(30),
+    salary INT
+);
+INSERT INTO employees (emp_id, emp_name, department, salary)
+VALUES
+(1, 'Arun', 'IT', 120000),
+(2, 'Ravi', 'HR', 80000),
+(3, 'Kumar', 'IT', 55000),
+(4, 'Siva', 'Finance', 45000),
+(5, 'Manoj', 'HR', 95000),
+(6, 'Vijay', 'Finance', 30000),
+(7, 'Ajay', 'IT', 70000),
+(8, 'Dinesh', 'HR', 40000);
+*/
+--1.Display the employee Name ,salary and Salary Category.
+select *,
+case
+when salary>=10000 then "High Salary"
+when salary>=6000 then "Meduim Salary"
+else "Low"
+end as status
+from Employees
+
+--2.Write a SQL query to display each employee’s name, department, and salary category based on the following company rules:
+--Employees with salary ₹1,00,000 or above → Excellent
+--Employees with salary ₹80,000 or above → Good
+--Employees with salary ₹50,000 or above → Average
+--Employees below ₹50,000 → Below Average
+
+select emp_name,department,salary,
+case
+    when salary>=100000 then "Excellent"
+    when salary>=80000 then "Good"
+    when salary>=50000 then "Average"
+    else "Below Average"
+end as status
+from Employees
