@@ -21,6 +21,7 @@ I am currently learning MySQL and practicing SQL queries to improve my **databas
 * Subqueries
 * Window Functions
 * Stored Procedures
+* Transactions
 
 ## Practice
 
