@@ -1,0 +1,39 @@
+CREATE TABLE orders12 (
+    order_id INT PRIMARY KEY,
+    customer_id INT,
+    order_date DATE,
+    amount DECIMAL(10,2),
+    status VARCHAR(20)
+);
+INSERT INTO orders12 (order_id, customer_id, order_date, amount, status)
+VALUES
+(1, 101, '2026-01-05', 500.00, 'DELIVERED'),
+(2, 102, '2026-01-15', 800.00, 'DELIVERED'),
+(3, 103, '2026-01-20', 700.00, 'CANCELLED'),
+(4, 101, '2026-02-03', 1000.00, 'DELIVERED'),
+(5, 104, '2026-02-10', 600.00, 'DELIVERED'),
+(6, 105, '2026-02-25', 900.00, 'CANCELLED'),
+(7, 102, '2026-03-05', 1200.00, 'DELIVERED'),
+(8, 106, '2026-03-15', 400.00, 'DELIVERED');
+
+--1.Find total revenue per month from the orders table. 
+select date_trunc(order_date,month) ,sum(amount) as total_revenue from Orders12 where status="DELIVERED" group by date_trunc(order_date,month);
+
+--2.Strings Functions.
+
+--1.Lower() - it is Convert tha all charcters to Lower Case.
+select * from Orders12 where lower(status)="delivered";
+--2.Upper() - it is convert tha all charcters into upper Case.
+select upper(status) as capes from Orders12;
+--3.trim() - it is used to remove extra spaces from stating and ending
+select *  from Orders12 where trim(status)="DELIVERED";
+--4.concat() - combine two or more strings.
+select *,concat(status,customer_id) as co_word from Orders12 ;
+--5.Len() - return the Number of Charcters in string.
+select length(status) from Orders12
+--6.subset() - extract the specific part of the string based on the position .
+select subset("satheesh",1,5) from Orders12
+--7.replace() - replace the text or Value with a another text Value
+select replace(status,'DELIVERED','DELIVERY') FROM Orders12;
+--spilt  - devide a strimng into multiple Parts
+elect split("DELIVER-Y",'-') from Orders12
