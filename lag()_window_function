@@ -1,0 +1,71 @@
+CREATE TABLE Employee_Salary (
+    Emp_ID INT PRIMARY KEY,
+    Employee VARCHAR(50),
+    Department VARCHAR(50),
+    Month_Name VARCHAR(10),
+    Salary INT
+);
+
+INSERT INTO Employee_Salary
+(Emp_ID, Employee, Department, Month_Name, Salary)
+VALUES
+(101, 'Arun', 'IT', 'Jan', 30000),
+(102, 'Bala', 'IT', 'Feb', 32000),
+(103, 'Charan', 'IT', 'Mar', 35000),
+(104, 'Dinesh', 'IT', 'Apr', 34000),
+(105, 'Ezhil', 'IT', 'May', 38000),
+
+(106, 'Farooq', 'HR', 'Jan', 28000),
+(107, 'Gokul', 'HR', 'Feb', 29000),
+(108, 'Hari', 'HR', 'Mar', 31000),
+(109, 'Imran', 'HR', 'Apr', 30000),
+(110, 'Jai', 'HR', 'May', 33000),
+
+(111, 'Karthik', 'Sales', 'Jan', 25000),
+(112, 'Lokesh', 'Sales', 'Feb', 27000),
+(113, 'Mani', 'Sales', 'Mar', 26000),
+(114, 'Naren', 'Sales', 'Apr', 29000),
+(115, 'Prakash', 'Sales', 'May', 31000),
+
+(116, 'Rahul', 'Finance', 'Jan', 40000),
+(117, 'Suresh', 'Finance', 'Feb', 42000),
+(118, 'Tamil', 'Finance', 'Mar', 45000),
+(119, 'Vignesh', 'Finance', 'Apr', 44000),
+(120, 'Yuvan', 'Finance', 'May', 48000);
+
+
+select * from employee_salary
+--1.Write a query to display each employee's previous month's salary using the LAG() function.
+select salary,Month_Name,lag(salary) over(order by salary) as previous_salary from employee_salary 
+
+--2.diff between the current month salary and previos month sal,ary
+select Month_Name,Salary ,salary -lag(salary) over(order by salary) as difference from employee_salary;
+
+--3.Write a query to compare the current month's salary with the previous month's salary and display:
+--Increased if the salary increased
+---Decreased if the salary decreased
+--NULL for the first month
+
+select month_name,salary,lag(salary) over(order by salary) as previous,
+case
+when salary > lag(salary) over(order by salary) then "Increased"
+when salary < lag(salary) over(order by salary) then "Decresed"
+when lag(salary) over(order by salary) is null then "null"
+end as final_result
+
+from employee_salary;
+
+
+
+--4.Display the previous month’s salary for each employee within their department using LAG() and PARTITION BY.
+
+select Department,Month_Name,Salary,lag(salary) over(partition by department order by salary) ,case
+when salary > lag(salary) over(partition by department order by salary) then "Increase"
+when salary < lag(salary) over(partition by department order by salary) then "Decrease"
+when salary is null then "Null"
+end as differnce
+from employee_salary
+
+--5.Calculate the percentage change in salary compared with the previous month using LAG().
+select month_name,salary,lag(salary) over(order by Emp_id),(salary-lag(salary) over(order by Emp_id))/(lag(salary) over(order by Emp_id) *1.0)* 100 from employee_salary
+
