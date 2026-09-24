@@ -43,3 +43,8 @@ select Employee,department,Salary,last_value(salary)  over(partition by departme
 --2.For every employee, find the May salary of their department and compare it with their current salary.
 
 select Employee,Department,Salary,last_value(salary) over(partition by department order by department),Salary - last_value(salary) over(partition by department order by department) from Employee_salary
+
+-- like wild cart operater
+
+select * from Employee_salary where Employee like "S%"
+select * from Employee_Salary where Employee like "%h"
